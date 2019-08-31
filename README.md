@@ -10,7 +10,8 @@ app is organised in a manner where you can search and display returns as a promi
 
 
 Include screenshots
-liri.png
+![alt text](liri.png)
+
 
 link to a deployed version of the app 
 https://kaur1081.github.io/Liri-Bot/
