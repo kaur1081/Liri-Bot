@@ -89,7 +89,7 @@ function whatItSays(ask, display){
       concertThis(display);
       break;
 
-      case "spotify":
+    case "spotify":
       console.log("song-search");
       getMeSpotify();
       break;
@@ -97,6 +97,14 @@ function whatItSays(ask, display){
     case "movie-this":
       console.log("movie search");
       getTheMovie(movieData);
+      break;
+
+    case "do-what-it-says":
+       random(ask);
+       break;
+
+    default:
+      console.log("please correct !!");
       break;
   }
 };
