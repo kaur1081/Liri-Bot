@@ -1,65 +1,64 @@
 require("dotenv").config();
-var keys    = require("./keys.js");
+var keys = require("./keys.js");
 var Spotify = require("node-spotify-api");
-var moment  = require('moment');
-var axios   = require('axios');
+var moment = require('moment');
+var axios = require('axios');
 var request = require("request");
-var fs      = require('fs');
+var fs = require('fs');
 // --------------------------------------------------------
 // concert-this
 function concertThis(band) {
-   axios.get("https://rest.bandsintown.com/artists/" + band + "/events?app_id=codingbootcamp").then(
-           function (res) {
-            //  console.log(res.data);
-               if (band === undefined) {
-                   console.log("oops!  forgot to put in a band!")
-               } else {
-                   console.log("--------------------------");
-                   console.log("Next Show For " + band);
-                   console.log("venue: " + res.data[0].venue.name);
-                   console.log("City: " + res.data[0].venue.city);
-                   var date = res.data[0].datetime;
-                   console.log("Date: " + moment(date).format("dddd, MMMM Do YYYY, h:mm:ss a"));
-               }
-           })
-       .catch(function (err) {
-           if (err.res) {
-               console.log("Error", error.message);
-           }
-           console.log(err.config);
-       });
+  axios.get("https://rest.bandsintown.com/artists/" + band + "/events?app_id=codingbootcamp").then(
+      function (res) {
+        //  console.log(res.data);
+        if (band === undefined) {
+          console.log("oops!  forgot to put in a band!")
+        } else {
+          console.log("--------------------------");
+          console.log("Next Show For " + band);
+          console.log("venue: " + res.data[0].venue.name);
+          console.log("City: " + res.data[0].venue.city);
+          var date = res.data[0].datetime;
+          console.log("Date: " + moment(date).format("dddd, MMMM Do YYYY, h:mm:ss a"));
+        }
+      })
+    .catch(function (err) {
+      if (err.res) {
+        console.log("Error", error.message);
+      }
+      console.log(err.config);
+    });
 }
-
-
 // spotify-this-song
 // -----------------------------------------------------
-
-var getArtistsName = function(artist){
+// var spotify = new Spotify(keys.spotify);
+var getArtistsName = function (artist) {
   return artist.name;
 }
-
-
-var getMeSpotify =  function(songName){
-  spotify.search({ type: 'track', query: 'songName'}, function(err, data) {
+var getMeSpotify = function (songName) {
+  spotify.search({
+    type: 'track',
+    query: 'songName'
+  }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
-  var songs = data.tracks.items[0]; 
-  for(var i=0; i<songs.length; i++){
-    console.log(i);
-    console.log('artist(s):' + songs[i].artists.map(getArtistsName));
-    console.log('song name:' + songs[i].name);
-    console.log('preview songs: ' + songs[i].preview_url);
-    console.timeLog('album: ' + songs[i].album.name);
-    console.log('----------------------------------------');
-}
+    var songs = data.tracks.items[0];
+    for (var i = 0; i < songs.length; i++) {
+      console.log(i);
+      console.log('artist(s):' + songs[i].artists.map(getArtistsName));
+      console.log('song name:' + songs[i].name);
+      console.log('preview songs: ' + songs[i].preview_url);
+      console.timeLog('album: ' + songs[i].album.name);
+      console.log('----------------------------------------');
+    }
   });
 };
-  // area for movie
-  var getTheMovie = function (movieThis){
+// area for movie
+var getTheMovie = function (movieThis) {
   var URL = "http://www.omdbapi.com/?t=" + movieThis + "&y=&plot=short&apikey=trilogy";
 
-  axios.get(URL).then(function(response) {
+  axios.get(URL).then(function (response) {
       var movieData = response.data
       console.log("-------------------------------\n");
       console.log("MOVIE TITLE: " + movieData.Title + '\n');
@@ -71,21 +70,60 @@ var getMeSpotify =  function(songName){
       console.log("PLOT: " + movieData.Plot + '\n');
       console.log("ACTORS: " + movieData.Actors + '\n');
       console.log("-------------------------------");
-  })
-  .catch(function(error) {
-      if (error.response){
-          console.log(error);
+    })
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error);
       };
-  });
+    });
 };
- // create do-what-it-says
 
+function random() {
+
+  fs.readFile("random.txt", "utf8", function (error, data) {
+    // If an error was experienced we will log it.
+    if (error) {
+      console.log(err);
+    }
+
+    data = data.split(",");
+
+    songInfo(data[1]);
+
+  });
+
+};
+
+// create do-what-it-says
 function whatItSays(ask, display){
-  
   switch(ask){
+  
+    case "concert-this":
+      console.log("band search")
+      concertThis(display)
+      break;
+  
+      case "spotify":
+      console.log("song-search")
+      getMeSpotify(functionData);
+      break;
+  
+    case "movie-this":
+      console.log("movie search")
+      // getMeSpotify(functionData);
+      // movie search function
+      break;
+  }
+  
+ }
+ 
+
+function whatItSays(ask, display) {
+
+  switch (ask) {
 
     case "concert-this":
-      // console.log("band search");
+      console.log("band search");
       concertThis(display);
       break;
 
@@ -100,8 +138,8 @@ function whatItSays(ask, display){
       break;
 
     case "do-what-it-says":
-       random(ask);
-       break;
+      random(ask);
+      break;
 
     default:
       console.log("please correct !!");
@@ -109,9 +147,9 @@ function whatItSays(ask, display){
   }
 };
 // function to run this
-function runThis(argOne, argTwo){
-    whatItSays(argOne, argTwo);
+function runThis(argOne, argTwo) {
+  whatItSays(argOne, argTwo);
 }
-  
-  
-runThis(process.argv[2],process.argv[3]);
+
+
+runThis(process.argv[2], process.argv[3]);
