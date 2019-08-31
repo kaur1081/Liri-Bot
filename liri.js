@@ -38,7 +38,8 @@ var getMeSpotify = function (songName) {
   spotify.search({
     type: 'track',
     query: 'songName'
-  }, function (err, data) {
+  },
+   function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
