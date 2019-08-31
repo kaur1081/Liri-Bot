@@ -31,7 +31,6 @@ function concertThis(band) {
 }
 // spotify-this-song
 // -----------------------------------------------------
-// var spotify = new Spotify(keys.spotify);
 var getArtistsName = function (artist) {
   return artist.name;
 }
@@ -54,7 +53,7 @@ var getMeSpotify = function (songName) {
     }
   });
 };
-// area for movie
+// area for movie-----------------------------------------------------
 var getTheMovie = function (movieThis) {
   var URL = "http://www.omdbapi.com/?t=" + movieThis + "&y=&plot=short&apikey=trilogy";
 
@@ -81,13 +80,10 @@ var getTheMovie = function (movieThis) {
 function random() {
 
   fs.readFile("random.txt", "utf8", function (error, data) {
-    // If an error was experienced we will log it.
     if (error) {
       console.log(err);
     }
-
     data = data.split(",");
-
     songInfo(data[1]);
 
   });
@@ -95,56 +91,30 @@ function random() {
 };
 
 // create do-what-it-says
-function whatItSays(ask, display){
-  switch(ask){
-  
+function whatItSays(ask, display) {
+  switch (ask) {
+
     case "concert-this":
       console.log("band search")
       concertThis(display)
       break;
-  
-      case "spotify":
-      console.log("song-search")
-      getMeSpotify(functionData);
-      break;
-  
-    case "movie-this":
-      console.log("movie search")
-      // getMeSpotify(functionData);
-      // movie search function
-      break;
-  }
-  
- }
- 
-
-function whatItSays(ask, display) {
-
-  switch (ask) {
-
-    case "concert-this":
-      console.log("band search");
-      concertThis(display);
-      break;
 
     case "spotify":
-      console.log("song-search");
-      getMeSpotify();
+      console.log("song search")
+      getMeSpotify(display);
       break;
 
     case "movie-this":
-      console.log("movie search");
-      getTheMovie(movieData);
+      console.log("movie search")
+      getTheMovie(display);
       break;
 
-    case "do-what-it-says":
-      random(ask);
-      break;
-
-    default:
-      console.log("please correct !!");
+    case "random":
+      console.log("song-search")
+        (functionData);
       break;
   }
+
 };
 // function to run this
 function runThis(argOne, argTwo) {
