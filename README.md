@@ -11,7 +11,7 @@ app is organised in a manner where you can search and display returns as a promi
 
 Include screenshots
 
-![alt text](C:\Users\waheguru\repos\Liri-Bot\liri.PNG)
+![liri-bot](liri.png)
 
 
 link to a deployed version of the app 

@@ -1,10 +1,11 @@
 require("dotenv").config();
 var keys = require("./keys.js");
-var Spotify = require("node-spotify-api");
+var Spotify = require('node-spotify-api');
 var moment = require('moment');
 var axios = require('axios');
 var request = require("request");
 var fs = require('fs');
+var spotify = new Spotify(keys.spotify);
 // --------------------------------------------------------
 // concert-this
 function concertThis(band) {
@@ -34,16 +35,19 @@ function concertThis(band) {
 var getArtistsName = function (artist) {
   return artist.name;
 }
+
 var getMeSpotify = function (songName) {
-  spotify.search({
-    type: 'track',
-    query: 'songName'
-  },
+  // console.log(songName);
+  
+  spotify.search({type: 'track',query: songName},
    function (err, data) {
+    //  console.log(data);
     if (err) {
-      return console.log('Error occurred: ' + err);
+      console.log('Error occurred: ' + err);
+      return;
     }
-    var songs = data.tracks.items[0];
+    var songs = data.tracks.items;
+    // console.log(songs)
     for (var i = 0; i < songs.length; i++) {
       console.log(i);
       console.log('artist(s):' + songs[i].artists.map(getArtistsName));
@@ -52,8 +56,10 @@ var getMeSpotify = function (songName) {
       console.timeLog('album: ' + songs[i].album.name);
       console.log('----------------------------------------');
     }
-  });
-};
+  })
+}
+
+
 // area for movie-----------------------------------------------------
 var getTheMovie = function (movieThis) {
   var URL = "http://www.omdbapi.com/?t=" + movieThis + "&y=&plot=short&apikey=trilogy";
@@ -115,12 +121,12 @@ function whatItSays(ask, display) {
         (functionData);
       break;
   }
+}
 
-};
 // function to run this
 function runThis(argOne, argTwo) {
   whatItSays(argOne, argTwo);
 }
 
-
+   
 runThis(process.argv[2], process.argv[3]);
