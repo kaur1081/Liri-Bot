@@ -14,14 +14,18 @@ Include screenshots
 ![liri-bot](https://github.com/kaur1081/Liri-Bot/blob/master/liri.PNG)
 
 
-link to a deployed version of the app 
-https://kaur1081.github.io/Liri-Bot/
+Technologies used in this app:
 
-Technologies used in the app
-code to read and set any environment variables with the dotenv package
-code required to import the keys.js file and store it in a variable.
-require spotify,moment, fs, request.
-access your keys information 
+- Html
+- JavaScript
+- Node.js
+- .env
+
+
+Code to read and set any environment variables with the dotenv package.
+Code required to import the keys.js file and store it in a variable.
+Require spotify,moment, fs, request.
+Access your keys information.
 Import the request npm package.
 Make it so liri.js can take in commands
 
