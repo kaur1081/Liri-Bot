@@ -12,7 +12,7 @@ App is organised in a manner where you can search and display returns as a promi
 
 Include screenshots
 
-![liri-bot](https://github.com/kaur1081/Liri-Bot/blob/master/liri.PNG)
+![liri-bot](https://github.com/kaur1081/Liri-Bot/blob/master/liriScreenshot.jpg)
 
 
 Technologies used in this app:
