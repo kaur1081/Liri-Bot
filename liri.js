@@ -38,25 +38,28 @@ var getArtistsName = function (artist) {
 
 var getMeSpotify = function (songName) {
   // console.log(songName);
-  
-  spotify.search({type: 'track',query: songName},
-   function (err, data) {
-    //  console.log(data);
-    if (err) {
-      console.log('Error occurred: ' + err);
-      return;
-    }
-    var songs = data.tracks.items;
-    // console.log(songs)
-    for (var i = 0; i < songs.length; i++) {
-      console.log(i);
-      console.log('artist(s):' + songs[i].artists.map(getArtistsName));
-      console.log('song name:' + songs[i].name);
-      console.log('preview songs: ' + songs[i].preview_url);
-      console.timeLog('album: ' + songs[i].album.name);
-      console.log('----------------------------------------');
-    }
-  })
+
+  spotify.search({
+      type: 'track',
+      query: songName
+    },
+    function (err, data) {
+      //  console.log(data);
+      if (err) {
+        console.log('Error occurred: ' + err);
+        return;
+      }
+      var songs = data.tracks.items;
+      // console.log(songs)
+      for (var i = 0; i < songs.length; i++) {
+        console.log(i);
+        console.log('artist(s):' + songs[i].artists.map(getArtistsName));
+        console.log('song name:' + songs[i].name);
+        console.log('preview songs: ' + songs[i].preview_url);
+        console.timeLog('album: ' + songs[i].album.name);
+        console.log('----------------------------------------');
+      }
+    })
 }
 
 
@@ -128,5 +131,5 @@ function runThis(argOne, argTwo) {
   whatItSays(argOne, argTwo);
 }
 
-   
+
 runThis(process.argv[2], process.argv[3]);
