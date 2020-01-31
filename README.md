@@ -32,3 +32,4 @@ Make it so liri.js can take in commands
 
 Role in the app development was to make sure every serach is working and displaying results. All my call backs are right. 
 
+Developer: Karishma Kaur Hattar
